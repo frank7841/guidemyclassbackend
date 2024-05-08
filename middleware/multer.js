@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { S3Client } = require("@aws-sdk/client-s3");
 // const s3 = require('aws-sdk/clients/s3')
 const multer = require("multer");

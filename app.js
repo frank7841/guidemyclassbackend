@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const { ApolloServer } = require("@apollo/server");
@@ -20,9 +22,12 @@ const { makeExecutableSchema } = require("@graphql-tools/schema");
 // const { useServer } = require("graphql-ws/lib/use/ws");
 const uploadFiles = require("./FetchApi/routes/uploadFiles");
 const paymentsDetails = require("./FetchApi/routes/payments");
+const uri ='mongodb+srv://simiyuwakasiaka:ncmpiVAOcJHGvuIu@guidemyclass.zzj9iuj.mongodb.net/?retryWrites=true&w=majority&appName=guidemyclass' 
+//process.env.MONGO_DB_URI;
 
 const port = 8080;
 const hostname = "localhost";
+console.log("MongoDB URI:", process.env.MONGO_DB_URI);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -130,8 +135,7 @@ async function startApolloServer(typeDefs, resolvers) {
 
   mongoose.set("strictQuery", false);
   mongoose
-    .connect(
-      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_ATLAS_PW}@${process.env.mongodb_clustername}.zzj9iuj.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+    .connect(uri,
 
       {
         useNewUrlParser: true,
